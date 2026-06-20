@@ -33,11 +33,18 @@ public class QuoteController {
         return "Hey " + name + "! 🌟 You're doing amazing today. Keep pushing forward!";
     }
 
+
     @GetMapping("/api/quotes/hello")
-    public Quote sayHello(@RequestParam(required = false) String name) {
-        //returning string object
-        String quoteContent = "Hey " + name + "! 🌟 You're doing amazing today. Keep pushing forward!";
-        return new Quote(1, quoteContent, "Your Inner Voice");
+    public Quote sayHello(@RequestParam(defaultValue = "Friend") String name) {
+        // Get a random Quran quote from service
+        Quote randomQuote = quoteService.getRandomQuote();
+
+        // Personalize the message with user's name
+        String personalizedMessage = "Hey " + name + "! 🌟 Here's a quote for you:\n\n"
+                + randomQuote.getContent();
+
+        // Return the personalized quote
+        return new Quote(randomQuote.getId(), personalizedMessage, randomQuote.getAuthor());
     }
 }
 

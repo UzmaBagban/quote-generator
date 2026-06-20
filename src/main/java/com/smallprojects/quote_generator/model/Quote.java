@@ -1,5 +1,10 @@
 package com.smallprojects.quote_generator.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Quote {
     int id;
     String content;

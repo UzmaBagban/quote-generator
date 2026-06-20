@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class QuoteService {
@@ -36,11 +37,17 @@ public class QuoteService {
     );
 
     //step 2 - create a random number picker
-    private Random random = new Random();
+   /* private Random random = new Random();
 
     //step 3 - Method 1- To get one random quote
     public Quote getRandomQuote(){
         int randomIndex = random.nextInt(quotes.size());
+        return quotes.get(randomIndex);
+    }
+    */
+    // Method: To get one random quote
+    public Quote getRandomQuote(){
+        int randomIndex = ThreadLocalRandom.current().nextInt(quotes.size());
         return quotes.get(randomIndex);
     }
 
